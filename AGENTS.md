@@ -7,6 +7,29 @@ This file provides context and instructions for AI coding agents (Copilot, Curso
 This is a Terraform module for [STACKIT](https://www.stackit.de/en/), the cloud platform by Schwarz Group.
 It is part of the [terraform-stackit-modules](https://github.com/terraform-stackit-modules) organization, which aims to provide community-maintained, production-grade Terraform modules for STACKIT.
 
+### This module: dns
+
+Manages STACKIT **DNS zones and record sets**.
+
+**Resources managed**
+- `stackit_dns_zone` — 0..N zones, via `for_each` over `var.zones`.
+- `stackit_dns_record_set` — 0..N record sets, via `for_each` over `var.records`.
+
+**Key inputs** — `project_id` (req), `zones` (map keyed by stable id:
+`{name, dns_name, type?, contact_email?, description?, acl?, default_ttl?, expire_time?,
+refresh_time?, retry_time?, negative_cache?, is_reverse_zone?, primaries?, active?}`),
+`records` (map keyed by stable id: `{zone_key, name, type, records, ttl?, comment?, active?}`).
+
+**Outputs** — `zone_ids`, `zone_dns_names`, `zone_primary_name_servers`, `record_set_ids`, `record_fqdns` (all maps key→value).
+
+**Gotchas**
+- A record references its zone via `zone_key` (a key in `var.zones`), NOT a zone_id — so
+  `for_each` never runs over the known-after-apply `zone_id`. A wrong `zone_key` fails at plan on
+  the `stackit_dns_zone.this[zone_key]` lookup (Terraform forbids a variable validation from
+  referencing another variable, so this is NOT enforced by a validation block).
+- Zone `type` validated against `primary` / `secondary`.
+- DNS resources are region-agnostic: no `region` variable in this module.
+
 ## Repository structure
 
 ```
