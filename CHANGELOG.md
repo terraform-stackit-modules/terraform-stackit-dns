@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 (2026-09-22)
+
+### Features
+
+* Initial STACKIT DNS module ([92e51a5](https://github.com/terraform-stackit-modules/terraform-stackit-dns/commit/92e51a543366aea107b68a4b22f99af9d8abafea))
+
+### Bug Fixes
+
+* drop cross-variable validation on records.zone_key ([e05ef9b](https://github.com/terraform-stackit-modules/terraform-stackit-dns/commit/e05ef9b7b1465f1d14945860b4dda62c84b3bae8))
+
 ## [1.0.1](https://github.com/terraform-stackit-modules/terraform-repo-template/compare/v1.0.0...v1.0.1) (2026-09-09)
 
 ### Bug Fixes
