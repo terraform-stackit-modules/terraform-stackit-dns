@@ -49,6 +49,10 @@ variable "records" {
   description = <<-EOT
     Map of DNS record sets to create, keyed by a stable identifier. Each value:
       - `zone_key` (required) : the key of the zone (in `var.zones`) this record belongs to.
+                                Must match an existing key in `var.zones`; a wrong key fails at
+                                plan with an "Invalid index" error on the zone lookup. (Terraform
+                                forbids a variable validation from referencing another variable,
+                                so this cross-check is enforced by the lookup, not a validation.)
       - `name`     (required) : record name, a valid domain per rfc1035, e.g. `www.example.com`.
       - `type`     (required) : record set type, e.g. `A`, `AAAA`, `CNAME`, `MX`, `TXT`.
       - `records`  (required) : list of record values, e.g. ["1.2.3.4"].
@@ -66,11 +70,4 @@ variable "records" {
     active   = optional(bool)
   }))
   default = {}
-
-  validation {
-    condition = alltrue([
-      for r in values(var.records) : contains(keys(var.zones), r.zone_key)
-    ])
-    error_message = "Each records[*].zone_key must reference an existing key in var.zones."
-  }
 }

@@ -24,8 +24,9 @@ refresh_time?, retry_time?, negative_cache?, is_reverse_zone?, primaries?, activ
 
 **Gotchas**
 - A record references its zone via `zone_key` (a key in `var.zones`), NOT a zone_id — so
-  `for_each` never runs over the known-after-apply `zone_id`. Validated: `zone_key` must exist
-  in `var.zones`.
+  `for_each` never runs over the known-after-apply `zone_id`. A wrong `zone_key` fails at plan on
+  the `stackit_dns_zone.this[zone_key]` lookup (Terraform forbids a variable validation from
+  referencing another variable, so this is NOT enforced by a validation block).
 - Zone `type` validated against `primary` / `secondary`.
 - DNS resources are region-agnostic: no `region` variable in this module.
 
