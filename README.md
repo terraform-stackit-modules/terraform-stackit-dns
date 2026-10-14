@@ -3,7 +3,7 @@
 
 Terraform module which manages [STACKIT DNS](https://registry.terraform.io/providers/stackitcloud/stackit/latest/docs/resources/dns_zone) zones and record sets on [STACKIT](https://www.stackit.de/en/).
 
-[![Terraform Registry](https://img.shields.io/endpoint?url=https://registry.terraform.io/v1/modules/terraform-stackit-modules/dns/stackit/latest)](https://registry.terraform.io/modules/terraform-stackit-modules/dns/stackit/latest)
+[![Terraform Registry](https://img.shields.io/github/v/release/terraform-stackit-modules/terraform-stackit-dns?label=registry&color=7B42BC&logo=terraform&logoColor=white&style=flat)](https://registry.terraform.io/modules/terraform-stackit-modules/dns/stackit/latest)
 [![License](https://img.shields.io/github/license/terraform-stackit-modules/terraform-stackit-dns)](./LICENSE)
 
 This repository is not from the official STACKIT organization.
